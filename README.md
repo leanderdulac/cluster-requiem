@@ -20,7 +20,7 @@ Initialize and prepare servers
 ```javascript
 var http = require('http');
 var cluster = require('cluster');
-var requiem = require('./lib');
+var requiem = require('cluster-requiem');
 
 if (cluster.isMaster) {
 	var worker = cluster.fork();
@@ -47,7 +47,7 @@ if (cluster.isMaster) {
 
 	var server = http.createServer(function(err, req) {
 			req.writeHead(200);
-			req.write('Hello world!');
+			req.end('Hello world!');
 	});
 
 	requiem.track(function(callback) {
@@ -61,6 +61,6 @@ if (cluster.isMaster) {
 }
 ```
 
-    Note: You need to track server sockets in case of a graceful shutdown(PM2 for instance, sends the 'shutdown' event before trying to kill the process). If you don't do this the server will stil receive connections while it waits for all trackers to finish.
-    Under high load this will potentially lead the server to never close, making PM2 kill long standing jobs as it can't handle they.
+> Note: You need to track server sockets in case of a graceful shutdown(PM2 for instance, sends the 'shutdown' event before trying to kill the process). If you don't do this the server will stil receive connections while it waits for all trackers to finish.
+> Under high load this will potentially lead the server to never close, making PM2 kill long standing jobs as it can't handle they.
 
