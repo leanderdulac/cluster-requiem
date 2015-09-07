@@ -1,6 +1,6 @@
 {
   "name": "cluster-requiem",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "high availability enhacements for clustering",
   "main": "lib/index.js",
   "scripts": {
